@@ -1,2 +1,2 @@
-# giang_sinh_an_lanh
-Mở bằng VS Code, Git trể tránh bị mất ảnh
+# Chúc emm một giánh sinh tràn đầy tình yêu thương
+mãi yêu em như những ngày đầu 😘
