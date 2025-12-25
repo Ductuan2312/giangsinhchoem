@@ -116,8 +116,179 @@
             box-shadow: 0 0 10px #FFD700;
             transition: width 0.1s linear;
         }
+                /* Letter Icon Vandiep */
+        #letter-icon {
+            position: fixed;
+            bottom: 150px;
+            right: 30px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            cursor: pointer;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 50px rgba(255, 215, 0, 0.5);
+            z-index: 150;
+            animation: letterPulse 2s infinite;
+            transition: transform 0.3s;
+        }
         
-        /* Music Player Vandiep */
+        #letter-icon:hover {
+            transform: scale(1.15) rotate(10deg);
+        }
+        
+        @keyframes letterPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+            50% { transform: scale(1.1); box-shadow: 0 0 50px rgba(255, 215, 0, 1), 0 0 80px rgba(255, 165, 0, 0.8); }
+        }
+        
+        /* Message Overlay Vandiep */
+        #message-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        #message-content {
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.95), rgba(211, 47, 47, 0.95));
+            border: 3px solid #FFD700;
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+            animation: slideIn 0.5s;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        #message-text {
+            color: #FFD700;
+            font-size: 26px;
+            line-height: 2;
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 215, 0, 0.5);
+            margin-bottom: 30px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        #click-hint {
+            color: #FFA500;
+            font-size: 18px;
+            font-weight: bold;
+            animation: blink 1.5s infinite;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+        }
+        
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0.5; }
+        }
+        
+        /* Video Overlay Vandiep */
+        #video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 250;
+        }
+        
+        #video-container {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            aspect-ratio: 16/9;
+        }
+        
+        #love-video {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.6);
+        }
+        
+        #close-video {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: #D32F2F;
+            color: white;
+            border: 2px solid #FFD700;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        #close-video:hover {
+            background: #8B0000;
+            transform: scale(1.05);
+        }
+        
+        /* Control Buttons Vandiep */
+        #control-buttons {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 99;
+        }
+        
+        #control-buttons button {
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.95), rgba(211, 47, 47, 0.95));
+            color: #FFD700;
+            border: 2px solid #FFD700;
+            padding: 12px 25px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s;
+            animation: none;
+            min-width: 200px;
+        }
+        
+        #control-buttons button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+        }
+        
+        #control-buttons button.active {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #8B0000;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 1);
+        }
+                /* Music Player Vandiep */
         #music-player {
             position: absolute;
             bottom: 100px;
@@ -227,6 +398,12 @@
 <body>
     <div id="error-log"></div>
     
+    <!-- Control Buttons Vandiep -->
+    <div id="control-buttons">
+        <button id="btn-tree" onclick="setTreeMode()">🎄 Về Cây Noel</button>
+        <button id="btn-auto-rotate" onclick="toggleAutoRotate()">🎆 Bung Ra Xoay</button>
+    </div>
+    
     <!-- UI Vandiep -->
     <div id="ui-layer">
         <!-- Vandiep -->
@@ -247,6 +424,34 @@
         </div>
         <button onclick="nextSong()">⏭</button>
     </div>
+    
+    <!-- Letter Icon Vandiep -->
+    <div id="letter-icon" onclick="openLetter()">💌</div>
+    
+    <!-- Message Overlay Vandiep -->
+    <div id="message-overlay" onclick="closeLetter()">
+        <div id="message-content" onclick="event.stopPropagation(); playVideo();">
+            <div id="message-text">
+Bé yêu ơi,<br>
+Anh yêu em mít rất nhiều, chúc cho anh và em sẽ luôn bên nhau dù có điều gì đi nữa.<br>
+Anh yêu em rất nhiều! ❤️<br>
+<br>
+Click vào đây để xem video của anh nhé!
+            </div>
+            <div id="click-hint">✨ Click vào đây để xem video ✨</div>
+        </div>
+    </div>
+    
+    <!-- Video Overlay Vandiep -->
+    <div id="video-overlay">
+        <div id="video-container">
+            <button id="close-video" onclick="closeVideo()">✕ Đóng</button>
+            <video id="love-video" controls>
+                <source src="./video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
 
     <!-- Vandiep -->
     <div id="copyright">© by vandiep</div>
@@ -261,10 +466,10 @@
         // ==========================================
         // Chỉ cần thêm đường dẫn file, tên sẽ tự động lấy từ tên file
         const MUSIC_FILE_PATHS = [
+            "./Khong Thoi Gian.mp3",
             "./noel.mp3",
             "./Le Duong.mp3",
-            "./Nguoi Dau Tien.mp3",
-            "./Khong Thoi Gian.mp3"
+            "./Nguoi Dau Tien.mp3"
         ];
         
         // Tự động tạo danh sách với tên từ file
@@ -497,10 +702,81 @@
             createSnowflake();
         }, 200);
         
+        // Letter and Video Functions Vandiep
+        function openLetter() {
+            document.getElementById('message-overlay').style.display = 'flex';
+            // Lower music volume
+            if (bgMusic) {
+                bgMusic.volume = 0.2;
+            }
+            // Launch fireworks
+            launchMultipleFireworks();
+        }
+        
+        function closeLetter() {
+            document.getElementById('message-overlay').style.display = 'none';
+            // Restore music volume
+            if (bgMusic) {
+                bgMusic.volume = 1.0;
+            }
+        }
+        
+        function playVideo() {
+            document.getElementById('message-overlay').style.display = 'none';
+            document.getElementById('video-overlay').style.display = 'flex';
+            const video = document.getElementById('love-video');
+            video.play();
+            // Pause music
+            if (bgMusic) {
+                bgMusic.pause();
+            }
+        }
+        
+        function closeVideo() {
+            document.getElementById('video-overlay').style.display = 'none';
+            const video = document.getElementById('love-video');
+            video.pause();
+            video.currentTime = 0;
+            // Resume music
+            if (bgMusic) {
+                bgMusic.volume = 1.0;
+                bgMusic.play().catch(e => console.log(e));
+            }
+        }
+        
         // Auto create floating text periodically Vandiep
         setInterval(() => {
             createFloatingText();
         }, 8000);
+        
+        // Control Functions Vandiep
+        function setTreeMode() {
+            state = 'TREE';
+            autoRotateEnabled = false;
+            manualControlEnabled = false;
+            document.getElementById('btn-tree').classList.add('active');
+            document.getElementById('btn-auto-rotate').classList.remove('active');
+            createHeartBurst();
+            launchMultipleFireworks();
+            setTimeout(() => {
+                document.getElementById('btn-tree').classList.remove('active');
+            }, 1000);
+        }
+        
+        function toggleAutoRotate() {
+            autoRotateEnabled = !autoRotateEnabled;
+            if (autoRotateEnabled) {
+                state = 'EXPLODE';
+                manualControlEnabled = true;
+                document.getElementById('btn-auto-rotate').classList.add('active');
+                document.getElementById('btn-tree').classList.remove('active');
+                createHeartBurst();
+                launchMultipleFireworks();
+            } else {
+                manualControlEnabled = false;
+                document.getElementById('btn-auto-rotate').classList.remove('active');
+            }
+        }
 
         const loader = new THREE.TextureLoader();
         const photoFiles = ['./image1.jpeg', './image2.jpeg', './image3.jpeg', './image4.jpeg', './image5.jpeg'];
@@ -587,6 +863,8 @@
         let state = 'TREE'; 
         let selectedIndex = 0;
         let handX = 0.5;
+        let autoRotateEnabled = false;
+        let manualControlEnabled = false;
 
         // ==========================================
         // 3. THREE.JS SYSTEM Vandiep
@@ -824,7 +1102,11 @@
             } else {
                 // EXPLODE
                 group.scale.set(1,1,1);
-                group.rotation.y += (handRotY - group.rotation.y) * 0.1;
+                if (autoRotateEnabled) {
+                    group.rotation.y += 0.01;
+                } else {
+                    group.rotation.y += (handRotY - group.rotation.y) * 0.1;
+                }
 
                 // size, color
                 for(let i=0; i<count; i++) {
@@ -912,6 +1194,7 @@
         function startSystem() {
             document.getElementById('btnStart').style.display = 'none';
             document.getElementById('music-player').style.display = 'flex';
+            document.getElementById('control-buttons').style.display = 'flex';
             
             // Play music with user interaction
             bgMusic.play().then(() => {
@@ -953,6 +1236,11 @@
             hands.onResults(results => {
                 ctx.clearRect(0, 0, 160, 120); 
                 ctx.drawImage(results.image, 0, 0, 160, 120);
+
+                // Skip hand detection if manual control is enabled
+                if (manualControlEnabled) {
+                    return;
+                }
 
                 // --- Hand Logic  ---
                 if (results.multiHandLandmarks.length === 2) {
